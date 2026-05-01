@@ -1,0 +1,102 @@
+{% extends "base.html" %} {% block extra_head %} {% endblock %} {% block content
+%}
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h1 class="h4 mb-3">Find a Game</h1>
+    <form id="search-form" class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label">Search by name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="search-input"
+          placeholder="e.g. Elden Ring"
+        />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Filter by company</label>
+        <input
+          type="text"
+          class="form-control"
+          id="company-input"
+          placeholder="e.g. FromSoftware"
+        />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Sort by</label>
+        <select class="form-select" id="sort-select">
+          <option value="gameplay_desc" selected>
+            Highest Gameplay Rating
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Filter by tags</label>
+        <div class="d-flex flex-wrap gap-2" id="tag-filter-container">
+          {% for tag in tags %}
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm tag-filter-btn"
+            data-tag="{{ tag }}"
+          >
+            {{ tag }}
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <button
+          type="button"
+          id="clear-filters"
+          class="btn btn-outline-secondary ms-2"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Games</h2>
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-hover align-middle" id="games-table">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th class="text-center">Gameplay</th>
+            <th class="text-center">Difficulty</th>
+            <th class="text-center">Ratings</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards for mobile -->
+    <div class="d-md-none" id="games-cards">
+      <!-- Filled by JS -->
+    </div>
+
+    <div id="no-results" class="text-muted text-center py-4 d-none">
+      No games found. Try adjusting your search or add a new game.
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+  window.RMG_CONFIG = {
+    apiGamesUrl: "{{ url_for('api_get_games') }}",
+    gameDetailBaseUrl: "{{ url_for('game_detail', game_id=0)[:-1] }}",
+  };
+</script>
+{% endblock %}
