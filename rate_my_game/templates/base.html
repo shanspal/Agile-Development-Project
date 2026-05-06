@@ -20,12 +20,24 @@
     />
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="bg-light">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}"
-          >Rate My Game</a
-        >
+        <div class="d-flex align-items-center gap-2">
+          <button
+            type="button"
+            id="nav-back"
+            class="btn btn-outline-light btn-sm"
+            data-fallback="{{ url_for('index') }}"
+            aria-label="Go back"
+            title="Back"
+          >
+            &larr; Back
+          </button>
+          <a class="navbar-brand fw-bold mb-0" href="{{ url_for('index') }}">
+            Rate My Game
+          </a>
+        </div>
         <button
           class="navbar-toggler"
           type="button"
@@ -38,7 +50,20 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item">
+              <div class="form-check form-switch text-nowrap my-2 my-lg-0">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="theme-toggle"
+                />
+                <label class="form-check-label text-light" for="theme-toggle">
+                  Dark mode
+                </label>
+              </div>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('add_game') }}">Add Game</a>
             </li>
@@ -49,7 +74,7 @@
 
     <main class="container mb-5">{% block content %}{% endblock %}</main>
 
-    <footer class="text-center text-muted small py-3 border-top bg-white">
+    <footer class="text-center text-muted small py-3 border-top bg-body">
       <span>Rate My Game &middot; Gameplay & Difficulty at a glance</span>
     </footer>
 
@@ -58,6 +83,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
     {% block extra_scripts %}{% endblock %}
   </body>
 </html>
