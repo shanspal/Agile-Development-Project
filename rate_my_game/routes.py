@@ -108,9 +108,42 @@ def register_routes(app):
                     filtered.append(g)
             games = filtered
 
-        # Sorting (only highest gameplay rating for now)
+        # Sorting 
+
         if sort == "gameplay_desc":
-            games.sort(key=lambda g: (g.average_gameplay() or 0), reverse=True)
+            games.sort(
+                key=lambda g: (g.average_gameplay() or 0),
+                reverse=True
+            )
+        
+
+        elif sort == "gameplay_asc":
+            games.sort(
+                key=lambda g: (g.average_gameplay() or 0)
+            )
+
+        elif sort == "difficulty_desc":
+            games.sort(
+                key=lambda g: (g.average_difficulty() or 0),
+                reverse=True
+            )
+
+        elif sort == "difficulty_asc":
+            games.sort(
+                key=lambda g: (g.average_difficulty() or 0)
+            )
+
+        elif sort == "ratings_desc":
+            games.sort(
+                key=lambda g: len(g.ratings),
+                reverse=True
+            )
+
+        elif sort == "alphabetical":
+            games.sort(
+                key=lambda g: g.name.lower()
+            )
+            
 
         result = []
         for g in games:
