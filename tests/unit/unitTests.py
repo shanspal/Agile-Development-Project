@@ -2,6 +2,28 @@ import pytest
 from rate_my_game.database import db
 from rate_my_game.models import Game, Rating, GameTag
 
+# helpers
+def make_game(name="Test Game", company="Acme Studios"):
+    game = Game(name=name, company=company)
+    db.session.add(game)
+    db.session.commit()
+    return game
+
+def add_rating(game_id, gameplay, difficulty):
+    rating = Rating(game_id=game_id, gameplay=gameplay, difficulty=difficulty)
+    db.session.add(rating)
+    db.session.commit()
+    return rating
+
+
+def add_tag(game_id, tag_name, count=1):
+    tag = GameTag(game_id=game_id, tag_name=tag_name, count=count)
+    db.session.add(tag)
+    db.session.commit()
+    return tag
+
+
+# tests
 class TestGameModel:
     def test_create_game(self, app):
         with app.app_context():
