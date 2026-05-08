@@ -2,7 +2,6 @@ from flask import render_template, request, redirect, url_for, jsonify, abort
 from .database import db
 from .models import Game, Rating, GameTag, PREDEFINED_TAGS
 
-
 def register_routes(app):
     # ---------- HTML ROUTES ----------
 
