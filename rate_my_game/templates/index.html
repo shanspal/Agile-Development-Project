@@ -1,5 +1,35 @@
-{% extends "base.html" %} {% block extra_head %} {% endblock %} {% block content%}
-<div class="card shadow-sm mb-4">
+{% extends "base.html" %} {% block extra_head %} {% endblock %} {% block
+content%}
+<section class="rmg-hero shadow-sm mb-4">
+  <div class="rmg-hero-inner">
+    <div class="row align-items-center g-3">
+      <div class="col-md-8">
+        <h1 class="display-6 mb-2 brand-title">Rate My Game</h1>
+        <p class="lead mb-3 rmg-hero-subtitle">
+          Search, rank, and compare games by gameplay and difficulty.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-primary" href="#search-card">Search Games</a>
+          <a class="btn btn-outline-light" href="{{ url_for('add_game') }}"
+            >Add Game</a
+          >
+          <a class="btn btn-outline-light" href="{{ url_for('ranks') }}"
+            >Game Ranks</a
+          >
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end d-none d-md-block">
+        <img
+          src="{{ url_for('static', filename='images/controller.png') }}"
+          alt="Controller"
+          class="rmg-hero-image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="card shadow-sm mb-4" id="search-card">
   <div class="card-body">
     <h1 class="h4 mb-3">Find a Game</h1>
     <form id="search-form" class="row g-3">

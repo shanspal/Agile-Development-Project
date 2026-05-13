@@ -35,7 +35,7 @@
             &larr; Back
           </button>
           <a class="navbar-brand fw-bold mb-0" href="{{ url_for('index') }}">
-            Rate My Game
+            <span class="brand-title">Rate My Game</span>
           </a>
         </div>
         <button
@@ -52,6 +52,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
             <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Search Games</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('ranks') }}">Game Ranks</a>
+            </li>
+            <li class="nav-item">
               <div class="form-check form-switch text-nowrap my-2 my-lg-0">
                 <input
                   class="form-check-input"
@@ -67,6 +73,22 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('add_game') }}">Add Game</a>
             </li>
+            {% if session.get('user_id') %}
+            <li class="nav-item">
+              <span class="navbar-text text-light small text-nowrap">
+                Signed in as <span class="fw-semibold">{{ session.get('username') }}</span>
+              </span>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{{ url_for('logout') }}" class="d-inline">
+                <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="btn btn-outline-light btn-sm" href="{{ url_for('login') }}">Login</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>

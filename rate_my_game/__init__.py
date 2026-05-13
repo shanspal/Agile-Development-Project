@@ -8,7 +8,7 @@ def create_app(test_config=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SECRET_KEY"] = "dev-secret-key"
 
-    if test_config is None:
+    if test_config is not None:
         app.config.update(test_config)
 
     db.init_app(app)

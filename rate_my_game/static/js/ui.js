@@ -39,53 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (backButton) {
     const fallbackUrl = backButton.dataset.fallback || "/";
-    const fallbackPath = (() => {
-      try {
-        return new URL(fallbackUrl, window.location.origin).pathname;
-      } catch {
-        return "/";
-      }
-    })();
-
-    const hasSameOriginReferrer = (() => {
-      try {
-        return (
-          document.referrer &&
-          new URL(document.referrer).origin === window.location.origin
-        );
-      } catch {
-        return false;
-      }
-    })();
-
-    if (
-      !hasSameOriginReferrer &&
-      window.history.length <= 1 &&
-      window.location.pathname === fallbackPath
-    ) {
-      backButton.disabled = true;
-      backButton.classList.add("disabled");
-      backButton.title = "No page to go back to";
-    }
-
     backButton.addEventListener("click", () => {
-      try {
-        if (
-          document.referrer &&
-          new URL(document.referrer).origin === window.location.origin
-        ) {
-          window.history.back();
-          return;
-        }
-      } catch {
-        // ignore referrer parse errors
-      }
-
-      if (window.history.length > 1) {
-        window.history.back();
-        return;
-      }
-
       window.location.assign(fallbackUrl);
     });
   }
