@@ -1,4 +1,5 @@
 from rate_my_game import create_app
+import os
 
 app = create_app()
 
