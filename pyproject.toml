@@ -1,0 +1,12 @@
+[project]
+name = "w26"
+version = "0.1.0"
+description = ":)"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1.3",
+    "pytest>=9.0.3",
+]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
