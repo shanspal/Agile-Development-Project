@@ -1,0 +1,101 @@
+name,company,gameplay,difficulty,tags
+Baldur's Gate 3,Larian Studios,5.0,3.7,RPG|Singleplayer|Story-Rich|Strategy
+Elden Ring,FromSoftware,5.0,4.8,Action|RPG|Singleplayer|Open World
+The Legend of Zelda: Breath of the Wild,Nintendo,4.9,3.6,Action|RPG|Singleplayer|Open World
+The Legend of Zelda: Ocarina of Time,Nintendo,4.9,3.0,Action|RPG|Singleplayer|Story-Rich
+Red Dead Redemption 2,Rockstar Games,4.9,2.8,Action|Singleplayer|Story-Rich|Open World
+The Witcher 3: Wild Hunt,CD Projekt Red,4.9,3.2,RPG|Singleplayer|Story-Rich|Open World
+Portal 2,Valve,4.9,2.5,Puzzle|Singleplayer|Story-Rich
+Half-Life 2,Valve,4.8,3.1,Action|Singleplayer|Story-Rich
+Super Mario Odyssey,Nintendo,4.8,2.4,Action|Singleplayer|Casual
+God of War,Santa Monica Studio,4.8,3.4,Action|Singleplayer|Story-Rich
+The Last of Us,Naughty Dog,4.8,3.3,Action|Singleplayer|Story-Rich|Horror
+Hades,Supergiant Games,4.8,4.0,Action|RPG|Singleplayer|Indie
+Mass Effect 2,BioWare,4.8,3.0,RPG|Singleplayer|Story-Rich
+Persona 5 Royal,Atlus,4.8,3.1,RPG|Singleplayer|Story-Rich
+Disco Elysium,ZA/UM,4.8,2.7,RPG|Singleplayer|Story-Rich|Indie
+Hollow Knight,Team Cherry,4.7,4.4,Action|Singleplayer|Indie
+Stardew Valley,ConcernedApe,4.7,1.8,Casual|Singleplayer|Indie
+Terraria,Re-Logic,4.7,3.1,Action|RPG|Multiplayer|Indie
+Resident Evil 4,Capcom,4.7,3.7,Action|Singleplayer|Horror
+Dark Souls III,FromSoftware,4.7,4.7,Action|RPG|Singleplayer
+Sekiro: Shadows Die Twice,FromSoftware,4.7,5.0,Action|Singleplayer
+Super Mario Galaxy,Nintendo,4.7,2.5,Action|Singleplayer|Casual
+Grand Theft Auto V,Rockstar Games,4.7,2.6,Action|Multiplayer|Open World
+Metal Gear Solid 3: Snake Eater,Konami,4.7,3.4,Action|Singleplayer|Story-Rich
+BioShock,2K Games,4.7,3.2,Action|Singleplayer|Story-Rich|Horror
+Minecraft,Mojang Studios,4.6,2.0,Casual|Multiplayer|Open World
+Slay the Spire,Mega Crit,4.6,4.1,Strategy|Singleplayer|Indie
+Celeste,Maddy Makes Games,4.6,4.5,Action|Singleplayer|Indie
+Divinity: Original Sin 2,Larian Studios,4.6,3.8,RPG|Multiplayer|Story-Rich|Strategy
+NieR: Automata,PlatinumGames,4.6,3.4,Action|RPG|Singleplayer|Story-Rich
+The Elder Scrolls V: Skyrim,Bethesda Game Studios,4.6,2.8,RPG|Singleplayer|Open World
+Chrono Trigger,Square Enix,4.6,2.9,RPG|Singleplayer|Story-Rich
+Final Fantasy VII Remake,Square Enix,4.5,3.1,Action|RPG|Singleplayer|Story-Rich
+Final Fantasy X,Square Enix,4.5,2.8,RPG|Singleplayer|Story-Rich
+Dragon Age: Origins,BioWare,4.5,3.4,RPG|Singleplayer|Story-Rich|Strategy
+Fallout: New Vegas,Obsidian Entertainment,4.5,3.0,RPG|Singleplayer|Story-Rich|Open World
+Cyberpunk 2077,CD Projekt Red,4.5,3.1,Action|RPG|Singleplayer|Open World
+Monster Hunter: World,Capcom,4.5,4.0,Action|RPG|Multiplayer
+Devil May Cry 5,Capcom,4.5,3.8,Action|Singleplayer
+Bayonetta,PlatinumGames,4.5,4.0,Action|Singleplayer
+DOOM Eternal,id Software,4.5,4.2,Action|Singleplayer
+Halo 3,Bungie,4.5,3.0,Action|Multiplayer|Competitive
+Apex Legends,Respawn Entertainment,4.4,4.1,Action|Multiplayer|Competitive
+Counter-Strike 2,Valve,4.4,4.8,Action|Multiplayer|Competitive
+Valorant,Riot Games,4.3,4.6,Action|Multiplayer|Competitive
+League of Legends,Riot Games,4.4,4.7,Multiplayer|Competitive|Strategy
+Dota 2,Valve,4.4,5.0,Multiplayer|Competitive|Strategy
+Overwatch 2,Blizzard Entertainment,4.2,3.8,Action|Multiplayer|Competitive
+Fortnite,Epic Games,4.3,3.5,Action|Multiplayer|Competitive
+Rocket League,Psyonix,4.4,4.0,Multiplayer|Competitive|Casual
+Tom Clancy's Rainbow Six Siege,Ubisoft,4.3,4.4,Action|Multiplayer|Competitive|Strategy
+Street Fighter 6,Capcom,4.4,4.2,Action|Multiplayer|Competitive
+Tekken 8,Bandai Namco Studios,4.3,4.3,Action|Multiplayer|Competitive
+Sid Meier's Civilization VI,Firaxis Games,4.4,3.6,Strategy|Singleplayer|Multiplayer
+XCOM 2,Firaxis Games,4.4,4.3,Strategy|Singleplayer
+StarCraft II,Blizzard Entertainment,4.4,4.5,Strategy|Multiplayer|Competitive
+Age of Empires II: Definitive Edition,Forgotten Empires,4.4,3.9,Strategy|Multiplayer|Competitive
+Total War: Warhammer III,Creative Assembly,4.2,3.7,Strategy|Singleplayer|Multiplayer
+Crusader Kings III,Paradox Development Studio,4.3,4.1,Strategy|Singleplayer
+RimWorld,Ludeon Studios,4.5,4.0,Strategy|Singleplayer|Indie
+Factorio,Wube Software,4.6,3.9,Strategy|Singleplayer|Multiplayer|Indie
+Cities: Skylines,Colossal Order,4.3,2.8,Strategy|Singleplayer|Casual
+The Sims 4,Maxis,4.0,1.7,Casual|Singleplayer
+Animal Crossing: New Horizons,Nintendo,4.3,1.5,Casual|Singleplayer|Multiplayer
+Dave the Diver,MINTROCKET,4.4,2.5,Casual|RPG|Singleplayer|Indie
+Balatro,LocalThunk,4.5,3.6,Strategy|Singleplayer|Indie|Casual
+Vampire Survivors,poncle,4.4,2.7,Action|Casual|Singleplayer|Indie
+Undertale,Toby Fox,4.5,2.8,RPG|Singleplayer|Story-Rich|Indie
+Cuphead,Studio MDHR,4.3,4.6,Action|Singleplayer|Indie
+Dead Cells,Motion Twin,4.4,4.1,Action|Singleplayer|Indie
+Ori and the Will of the Wisps,Moon Studios,4.4,3.5,Action|Singleplayer|Story-Rich
+INSIDE,Playdead,4.3,2.6,Puzzle|Singleplayer|Story-Rich|Indie
+Limbo,Playdead,4.2,2.9,Puzzle|Singleplayer|Horror|Indie
+Return of the Obra Dinn,Lucas Pope,4.4,3.7,Puzzle|Singleplayer|Indie
+The Witness,Thekla,4.3,4.2,Puzzle|Singleplayer|Indie
+Baba Is You,Hempuli,4.3,4.6,Puzzle|Singleplayer|Indie
+Tetris Effect: Connected,Enhance,4.3,3.0,Puzzle|Casual|Multiplayer
+It Takes Two,Hazelight Studios,4.5,2.7,Action|Puzzle|Multiplayer|Story-Rich
+Among Us,Innersloth,4.0,1.8,Casual|Multiplayer|Indie
+Phasmophobia,Kinetic Games,4.1,3.0,Horror|Multiplayer|Indie
+Resident Evil 2,Capcom,4.5,3.6,Action|Singleplayer|Horror
+Silent Hill 2,Konami,4.5,3.0,Singleplayer|Story-Rich|Horror
+Dead Space,EA Redwood Shores,4.3,3.5,Action|Singleplayer|Horror
+Alien: Isolation,Creative Assembly,4.2,4.0,Singleplayer|Horror
+Amnesia: The Dark Descent,Frictional Games,4.1,3.4,Singleplayer|Horror|Indie
+Outlast,Red Barrels,4.0,3.2,Singleplayer|Horror|Indie
+Subnautica,Unknown Worlds Entertainment,4.5,3.2,Singleplayer|Open World|Horror|Indie
+No Man's Sky,Hello Games,4.1,2.8,Singleplayer|Multiplayer|Open World|Indie
+Forza Horizon 5,Playground Games,4.5,2.4,Casual|Multiplayer|Open World
+Microsoft Flight Simulator,Asobo Studio,4.3,3.8,Singleplayer|Casual
+Firewatch,Campo Santo,4.1,1.8,Singleplayer|Story-Rich|Indie
+Life is Strange,Dontnod Entertainment,4.2,1.6,Singleplayer|Story-Rich
+Detroit: Become Human,Quantic Dream,4.2,1.9,Singleplayer|Story-Rich
+What Remains of Edith Finch,Giant Sparrow,4.3,1.5,Singleplayer|Story-Rich|Indie
+A Plague Tale: Innocence,Asobo Studio,4.1,2.6,Action|Singleplayer|Story-Rich
+Tomb Raider,Crystal Dynamics,4.1,2.8,Action|Singleplayer|Story-Rich
+Assassin's Creed Odyssey,Ubisoft Quebec,4.1,2.9,Action|RPG|Singleplayer|Open World
+Ghost of Tsushima,Sucker Punch Productions,4.5,3.2,Action|Singleplayer|Story-Rich|Open World
+Horizon Zero Dawn,Guerrilla Games,4.3,3.1,Action|RPG|Singleplayer|Open World
+Outer Wilds,Mobius Digital,4.6,3.8,Puzzle|Singleplayer|Story-Rich|Indie
