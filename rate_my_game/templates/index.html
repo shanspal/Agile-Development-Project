@@ -1,68 +1,99 @@
 {% extends "base.html" %} {% block extra_head %} {% endblock %} {% block
 content%}
-<section class="rmg-hero shadow-sm mb-4">
+<section class="rmg-hero shadow-lg mb-5">
   <div class="rmg-hero-inner">
-    <div class="row align-items-center g-3">
-      <div class="col-md-8">
-        <h1 class="display-6 mb-2 brand-title">Rate My Game</h1>
-        <p class="lead mb-3 rmg-hero-subtitle">
-          Search, rank, and compare games by gameplay and difficulty.
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <span class="badge bg-primary rounded-pill mb-3"
+          >Discover the best game ratings</span
+        >
+        <h1 class="display-5 fw-semibold">
+          Search, rate, and compare games with confidence.
+        </h1>
+        <p class="lead text-white-75 mb-4">
+          Track gameplay and difficulty scores, explore community tags, and find
+          games that match your taste.
         </p>
-        <div class="d-flex flex-wrap gap-2">
-          <a class="btn btn-primary" href="#search-card">Search Games</a>
-          <a class="btn btn-outline-light" href="{{ url_for('add_game') }}"
-            >Add Game</a
-          >
-          <a class="btn btn-outline-light" href="{{ url_for('ranks') }}"
-            >Game Ranks</a
+        <div class="d-flex flex-column flex-sm-row gap-3">
+          <a class="btn btn-primary btn-lg" href="#search-card">Search Games</a>
+          <a class="btn btn-outline-light btn-lg" href="{{ url_for('ranks') }}"
+            >View Rankings</a
           >
         </div>
       </div>
-      <div class="col-md-4 text-md-end d-none d-md-block">
+      <div class="col-lg-5 text-center">
         <img
-          src="{{ url_for('static', filename='images/controller.png') }}"
-          alt="Controller"
           class="rmg-hero-image"
+          src="{{ url_for('static', filename='images/controller.png') }}"
+          alt="Game controller"
         />
       </div>
     </div>
   </div>
 </section>
 
-<div class="card shadow-sm mb-4" id="search-card">
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+  <div class="col">
+    <div class="feature-card h-100 p-4 shadow-sm rounded-4">
+      <h3 class="h5">Refined Search</h3>
+      <p class="text-muted mb-0">
+        Filter games by name, company, tags and sort by rating to discover your
+        next favourite.
+      </p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="feature-card h-100 p-4 shadow-sm rounded-4">
+      <h3 class="h5">Detailed Ratings</h3>
+      <p class="text-muted mb-0">
+        Track gameplay and difficulty separately for a clear view of each game’s
+        strengths.
+      </p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="feature-card h-100 p-4 shadow-sm rounded-4">
+      <h3 class="h5">Community Tags</h3>
+      <p class="text-muted mb-0">
+        Add or vote on genre tags to help others find games faster.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm" id="search-card">
   <div class="card-body">
     <h1 class="h4 mb-3">Find a Game</h1>
     <form id="search-form" class="row g-3">
       <div class="col-md-4">
-        <label class="form-label">Search by name</label>
+        <label class="form-label">Search</label>
         <input
-          type="text"
-          class="form-control"
           id="search-input"
-          placeholder="e.g. Elden Ring"
+          type="search"
+          class="form-control"
+          placeholder="Game name"
         />
       </div>
       <div class="col-md-4">
-        <label class="form-label">Filter by company</label>
+        <label class="form-label">Company</label>
         <input
+          id="company-input"
           type="text"
           class="form-control"
-          id="company-input"
-          placeholder="e.g. FromSoftware"
+          placeholder="Publisher or studio"
         />
       </div>
       <div class="col-md-4">
         <label class="form-label">Sort by</label>
-        <select class="form-select" id="sort-select">
-          <option value="gameplay_desc" selected>
-            Highest Gameplay Rating
-          </option>
+        <select id="sort-select" class="form-select">
+          <option value="name">Name</option>
+          <option value="avg_gameplay">Gameplay</option>
+          <option value="avg_difficulty">Difficulty</option>
         </select>
       </div>
 
       <div class="col-12">
-        <label class="form-label">Filter by tags</label>
-        <div class="d-flex flex-wrap gap-2" id="tag-filter-container">
+        <div class="d-flex flex-wrap gap-2">
           {% for tag in tags %}
           <button
             type="button"
@@ -75,21 +106,26 @@ content%}
         </div>
       </div>
 
+      <div class="col-12">
+        <div class="btn-group" role="group" aria-label="Tag filters">
+          <button
+            type="button"
+            id="clear-filters"
+            class="btn btn-outline-secondary"
+          >
+            Clear filters
+          </button>
+        </div>
+      </div>
+
       <div class="col-12 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary">Search</button>
-        <button
-          type="button"
-          id="clear-filters"
-          class="btn btn-outline-secondary ms-2"
-        >
-          Clear
-        </button>
+        <button type="submit" class="btn btn-primary">Apply filters</button>
       </div>
     </form>
   </div>
 </div>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm mt-4">
   <div class="card-body">
     <h2 class="h5 mb-3">Games</h2>
     <div class="table-responsive d-none d-md-block">
@@ -101,12 +137,10 @@ content%}
             <th class="text-center">Gameplay</th>
             <th class="text-center">Difficulty</th>
             <th class="text-center">Ratings</th>
-            <th class="text-center">Actions</th>
+            <th class="text-center">View</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Filled by JS -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
 

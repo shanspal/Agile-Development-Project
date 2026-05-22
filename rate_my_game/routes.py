@@ -159,7 +159,7 @@ def register_routes(app):
         search = request.args.get("search", "", type=str).strip()
         company = request.args.get("company", "", type=str).strip()
         tags = request.args.getlist("tags")
-        sort = request.args.get("sort", "gameplay_desc", type=str)
+        sort = request.args.get("sort", "avg_gameplay", type=str)
 
         query = Game.query
 
@@ -173,7 +173,6 @@ def register_routes(app):
 
         games = query.all()
 
-        # Filter by tags (game must have all selected tags with count > 0)
         if tags:
             filtered = []
             for g in games:
@@ -182,8 +181,13 @@ def register_routes(app):
                     filtered.append(g)
             games = filtered
 
-        # Sorting (only highest gameplay rating for now)
-        if sort == "gameplay_desc":
+        if sort == "name":
+            games.sort(key=lambda g: g.name.lower())
+        elif sort == "avg_gameplay":
+            games.sort(key=lambda g: (g.average_gameplay() or 0), reverse=True)
+        elif sort == "avg_difficulty":
+            games.sort(key=lambda g: (g.average_difficulty() or 0), reverse=True)
+        else:
             games.sort(key=lambda g: (g.average_gameplay() or 0), reverse=True)
 
         result = []

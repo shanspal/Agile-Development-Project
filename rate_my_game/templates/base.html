@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <title>Rate My Game</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/controller.png') }}"> 
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/controller.png') }}"
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -21,83 +25,95 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
-      <div class="container-fluid">
-        <div class="d-flex align-items-center gap-2">
-          <button
-            type="button"
-            id="nav-back"
-            class="btn btn-outline-light btn-sm"
-            data-fallback="{{ url_for('index') }}"
-            aria-label="Go back"
-            title="Back"
-          >
-            &larr; Back
-          </button>
-          <a class="navbar-brand fw-bold mb-0" href="{{ url_for('index') }}">
-            <span class="brand-title">Rate My Game</span>
-          </a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 shadow-lg">
+      <div class="container-fluid px-4 px-xl-5">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2"
+          href="{{ url_for('index') }}"
+        >
+          <img
+            src="{{ url_for('static', filename='images/controller.png') }}"
+            alt="Logo"
+            width="34"
+            height="34"
+          />
+          <span class="brand-title mb-0">Rate My Game</span>
+        </a>
+
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul
+            class="navbar-nav nav-pills nav-fill mb-2 mb-lg-0 ms-lg-4 gap-2 w-100"
+          >
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('index') }}">Search Games</a>
+              <a
+                class="nav-link {% if request.endpoint == 'index' %}active{% endif %}"
+                href="{{ url_for('index') }}"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('ranks') }}">Game Ranks</a>
+              <a
+                class="nav-link {% if request.endpoint == 'ranks' %}active{% endif %}"
+                href="{{ url_for('ranks') }}"
+                >Ranks</a
+              >
             </li>
             <li class="nav-item">
-              <div class="form-check form-switch text-nowrap my-2 my-lg-0">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="theme-toggle"
-                />
-                <label class="form-check-label text-light" for="theme-toggle">
-                  Dark mode
-                </label>
-              </div>
+              <a
+                class="nav-link {% if request.endpoint == 'add_game' %}active{% endif %}"
+                href="{{ url_for('add_game') }}"
+                >Add Game</a
+              >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('add_game') }}">Add Game</a>
-            </li>
-            {% if session.get('user_id') %}
-            <li class="nav-item">
-              <span class="navbar-text text-light small text-nowrap">
-                Signed in as <span class="fw-semibold">{{ session.get('username') }}</span>
-              </span>
-            </li>
-            <li class="nav-item">
-              <form method="post" action="{{ url_for('logout') }}" class="d-inline">
-                <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
-              </form>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="btn btn-outline-light btn-sm" href="{{ url_for('login') }}">Login</a>
-            </li>
-            {% endif %}
           </ul>
+
+          <div class="d-flex align-items-center gap-2 ms-lg-auto">
+            <button
+              class="btn btn-outline-light btn-sm"
+              id="theme-toggle"
+              type="button"
+            >
+              Dark
+            </button>
+            {% if session.get("user_id") %}
+            <form method="post" action="{{ url_for('logout') }}" class="m-0">
+              <button type="submit" class="btn btn-outline-light btn-sm">
+                Logout
+              </button>
+            </form>
+            {% else %}
+            <a
+              class="btn btn-outline-light btn-sm"
+              href="{{ url_for('login') }}"
+              >Login</a
+            >
+            <a class="btn btn-primary btn-sm" href="{{ url_for('register') }}"
+              >Register</a
+            >
+            {% endif %}
+          </div>
         </div>
       </div>
     </nav>
 
-    <main class="container mb-5">{% block content %}{% endblock %}</main>
+    <main class="container-fluid px-4 px-xl-5 mb-5">
+      {% block content %}{% endblock %}
+    </main>
 
     <footer class="text-center text-muted small py-3 border-top bg-body">
-      <span>Rate My Game &middot; Gameplay & Difficulty at a glance</span>
+      <span>Rate My Game · Gameplay & Difficulty at a glance</span>
     </footer>
 
     <script

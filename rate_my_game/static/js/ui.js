@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const THEME_KEY = "rmg_theme";
-
   const themeToggle = document.getElementById("theme-toggle");
   const backButton = document.getElementById("nav-back");
 
@@ -13,27 +12,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function applyTheme(theme) {
-    const resolved = theme === "dark" ? "dark" : "light";
-    document.documentElement.setAttribute("data-bs-theme", resolved);
-    localStorage.setItem(THEME_KEY, resolved);
-    if (themeToggle) themeToggle.checked = resolved === "dark";
-    setTableHeaderTheme(resolved);
-  }
-
   function getInitialTheme() {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === "light" || stored === "dark") return stored;
-    return window.matchMedia?.("(prefers-color-scheme: dark)")?.matches
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
   }
 
-  applyTheme(getInitialTheme());
+  function updateToggleText(theme) {
+    if (!themeToggle) return;
+    themeToggle.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  }
+
+  function applyTheme(theme) {
+    const resolved = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-bs-theme", resolved);
+    localStorage.setItem(THEME_KEY, resolved);
+    updateToggleText(resolved);
+    setTableHeaderTheme(resolved);
+  }
+
+  const initialTheme = getInitialTheme();
+  applyTheme(initialTheme);
 
   if (themeToggle) {
-    themeToggle.addEventListener("change", () => {
-      applyTheme(themeToggle.checked ? "dark" : "light");
+    themeToggle.addEventListener("click", () => {
+      const current =
+        document.documentElement.getAttribute("data-bs-theme") ||
+        getInitialTheme();
+      applyTheme(current === "dark" ? "light" : "dark");
     });
   }
 
