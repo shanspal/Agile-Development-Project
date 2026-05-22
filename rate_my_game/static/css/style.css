@@ -7,6 +7,49 @@ body {
     sans-serif;
 }
 
+html[data-bs-theme="dark"] {
+  --bs-body-bg: #161616;
+  --bs-secondary-bg: #171a21;
+}
+
+.brand-title {
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #ffffff, #cfe0ff, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rmg-hero {
+  border-radius: 1rem;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      1200px circle at 10% 10%,
+      rgba(13, 110, 253, 0.45),
+      transparent 55%
+    ),
+    linear-gradient(135deg, #111827, #0b1220);
+  color: #fff;
+}
+
+.rmg-hero-inner {
+  padding: 1.5rem 1.5rem;
+}
+
+.rmg-hero-subtitle {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 48ch;
+}
+
+.rmg-hero-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.35));
+  opacity: 0.95;
+}
+
 /* Rating circles */
 .rating-circle {
   width: 90px;
@@ -118,53 +161,68 @@ body {
   transform: scale(0.97);
 }
 
-/* Rank row expanded hover preview */
-.rank-row {
-  cursor: pointer;
+/* Rank table */
+.ranks-table {
+  min-width: 900px;
 }
 
+.ranks-table th,
+.ranks-table td {
+  white-space: nowrap;
+}
+
+/* Hide preview row by default */
 .rank-preview-row {
   display: none;
 }
 
+/* Show preview row only when hovering the game row */
 .rank-row:hover + .rank-preview-row,
 .rank-preview-row:hover {
   display: table-row;
 }
 
-.rank-expanded-preview {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  padding: 1rem;
-  background-color: var(--bs-body-bg);
-  border-left: 4px solid var(--bs-primary);
+/* Allow preview content to wrap instead of pushing table wider */
+.rank-preview-row td {
+  white-space: normal;
 }
 
+/* Expanded preview card */
+.rank-expanded-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Game image */
 .rank-expanded-img {
-  width: 160px;
-  height: 100px;
+  width: 180px;
+  height: 110px;
   object-fit: cover;
   border-radius: 0.5rem;
-  background-color: var(--bs-secondary-bg);
+  background: #e9ecef;
   flex-shrink: 0;
 }
 
+/* Preview text area */
 .rank-expanded-info {
   flex: 1;
+  min-width: 0;
 }
 
+/* Description should wrap normally */
 .rank-expanded-info p {
-  max-width: 800px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
-@media (max-width: 768px) {
-  .rank-expanded-preview {
-    flex-direction: column;
-  }
-
-  .rank-expanded-img {
-    width: 100%;
-    height: 160px;
-  }
+/* Dark mode preview background */
+html[data-bs-theme="dark"] .rank-expanded-preview {
+  background: #2b2f33;
 }

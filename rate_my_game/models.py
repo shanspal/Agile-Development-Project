@@ -60,3 +60,11 @@ class GameTag(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey("games.id"), nullable=False)
     tag_name = db.Column(db.String(50), nullable=False)
     count = db.Column(db.Integer, default=0, nullable=False)
+
+class User(db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    password_hash = db.Column(db.String(255), nullable=False)
