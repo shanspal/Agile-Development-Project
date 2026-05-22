@@ -117,3 +117,54 @@ body {
 .btn:active {
   transform: scale(0.97);
 }
+
+/* Rank row expanded hover preview */
+.rank-row {
+  cursor: pointer;
+}
+
+.rank-preview-row {
+  display: none;
+}
+
+.rank-row:hover + .rank-preview-row,
+.rank-preview-row:hover {
+  display: table-row;
+}
+
+.rank-expanded-preview {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: var(--bs-body-bg);
+  border-left: 4px solid var(--bs-primary);
+}
+
+.rank-expanded-img {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background-color: var(--bs-secondary-bg);
+  flex-shrink: 0;
+}
+
+.rank-expanded-info {
+  flex: 1;
+}
+
+.rank-expanded-info p {
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .rank-expanded-preview {
+    flex-direction: column;
+  }
+
+  .rank-expanded-img {
+    width: 100%;
+    height: 160px;
+  }
+}

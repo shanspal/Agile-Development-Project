@@ -4,9 +4,11 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h1 class="h4 mb-3">Edit Game</h1>
+
         {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
+
         <form method="post" class="row g-3">
           <div class="col-12">
             <label class="form-label">Game Name</label>
@@ -18,6 +20,7 @@
               required
             />
           </div>
+
           <div class="col-12">
             <label class="form-label">Company</label>
             <input
@@ -28,6 +31,30 @@
               required
             />
           </div>
+
+          <div class="col-12">
+            <label class="form-label">Image URL</label>
+            <input
+              type="text"
+              name="image_url"
+              class="form-control"
+              value="{{ game.image_url or '' }}"
+              placeholder="/static/images/valorant.png"
+            />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea
+              name="description"
+              class="form-control"
+              rows="4"
+              placeholder="Write a short description of the game..."
+            >
+{{ game.description or '' }}</textarea
+            >
+          </div>
+
           <div class="col-12 d-flex justify-content-end">
             <a
               href="{{ url_for('game_detail', game_id=game.id) }}"

@@ -23,6 +23,8 @@ class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     company = db.Column(db.String(120), nullable=False)
+    image_url = db.Column(db.String(500), nullable=True)
+    description = db.Column(db.Text, nullable=True)
 
     ratings = db.relationship("Rating", backref="game", lazy=True, cascade="all, delete-orphan")
     tags = db.relationship("GameTag", backref="game", lazy=True, cascade="all, delete-orphan")

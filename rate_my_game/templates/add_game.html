@@ -4,18 +4,42 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h1 class="h4 mb-3">Add a New Game</h1>
+
         {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
+
         <form method="post" class="row g-3">
           <div class="col-12">
             <label class="form-label">Game Name</label>
             <input type="text" name="name" class="form-control" required />
           </div>
+
           <div class="col-12">
             <label class="form-label">Company</label>
             <input type="text" name="company" class="form-control" required />
           </div>
+
+          <div class="col-12">
+            <label class="form-label">Image URL</label>
+            <input
+              type="text"
+              name="image_url"
+              class="form-control"
+              placeholder="https://example.com/game-image.jpg"
+            />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea
+              name="description"
+              class="form-control"
+              rows="4"
+              placeholder="Write a short description of the game..."
+            ></textarea>
+          </div>
+
           <div class="col-12 d-flex justify-content-end">
             <a
               href="{{ url_for('index') }}"

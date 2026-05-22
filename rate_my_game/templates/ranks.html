@@ -1,0 +1,178 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid px-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-11 col-xxl-10">
+      <div
+        class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3"
+      >
+        <h1 class="h4 m-0">Game Ranks</h1>
+
+        <a
+          class="btn btn-outline-secondary btn-sm"
+          href="{{ url_for('index') }}"
+        >
+          Search Games
+        </a>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 ranks-table">
+              <thead class="table-light">
+                <tr>
+                  <th class="text-nowrap">Rank</th>
+
+                  <th class="text-nowrap">
+                    <div class="d-inline-flex align-items-center gap-1">
+                      <span>Name</span>
+                      <a
+                        href="{{ url_for('ranks', sort='name', order=next_order if sort_by == 'name' else 'asc') }}"
+                        class="btn btn-sm btn-link p-0 text-decoration-none"
+                        title="Sort by name"
+                      >
+                        {% if sort_by == "name" %} {% if order == "asc" %}▲{%
+                        else %}▼{% endif %} {% else %} ↕ {% endif %}
+                      </a>
+                    </div>
+                  </th>
+
+                  <th class="text-nowrap">Company</th>
+
+                  <th class="text-center text-nowrap">
+                    <div class="d-inline-flex align-items-center gap-1">
+                      <span>Avg Gameplay</span>
+                      <a
+                        href="{{ url_for('ranks', sort='gameplay', order=next_order if sort_by == 'gameplay' else 'desc') }}"
+                        class="btn btn-sm btn-link p-0 text-decoration-none"
+                        title="Sort by average gameplay"
+                      >
+                        {% if sort_by == "gameplay" %} {% if order == "asc"
+                        %}▲{% else %}▼{% endif %} {% else %} ↕ {% endif %}
+                      </a>
+                    </div>
+                  </th>
+
+                  <th class="text-center text-nowrap">
+                    <div class="d-inline-flex align-items-center gap-1">
+                      <span>Avg Difficulty</span>
+                      <a
+                        href="{{ url_for('ranks', sort='difficulty', order=next_order if sort_by == 'difficulty' else 'desc') }}"
+                        class="btn btn-sm btn-link p-0 text-decoration-none"
+                        title="Sort by average difficulty"
+                      >
+                        {% if sort_by == "difficulty" %} {% if order == "asc"
+                        %}▲{% else %}▼{% endif %} {% else %} ↕ {% endif %}
+                      </a>
+                    </div>
+                  </th>
+
+                  <th class="text-center text-nowrap">
+                    <div class="d-inline-flex align-items-center gap-1">
+                      <span>Ratings</span>
+                      <a
+                        href="{{ url_for('ranks', sort='ratings', order=next_order if sort_by == 'ratings' else 'desc') }}"
+                        class="btn btn-sm btn-link p-0 text-decoration-none"
+                        title="Sort by ratings count"
+                      >
+                        {% if sort_by == "ratings" %} {% if order == "asc" %}▲{%
+                        else %}▼{% endif %} {% else %} ↕ {% endif %}
+                      </a>
+                    </div>
+                  </th>
+
+                  <th class="text-center text-nowrap">View</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for game in games %}
+                <tr class="rank-row">
+                  <td class="fw-semibold text-nowrap">#{{ loop.index }}</td>
+                  <td class="text-nowrap">{{ game.name }}</td>
+                  <td class="text-nowrap">{{ game.company }}</td>
+
+                  <td class="text-center text-nowrap">
+                    {% if game.average_gameplay() %} {{
+                    "%.1f"|format(game.average_gameplay()) }} {% else %} - {%
+                    endif %}
+                  </td>
+
+                  <td class="text-center text-nowrap">
+                    {% if game.average_difficulty() %} {{
+                    "%.1f"|format(game.average_difficulty()) }} {% else %} - {%
+                    endif %}
+                  </td>
+
+                  <td class="text-center text-nowrap">
+                    {{ game.ratings|length }}
+                  </td>
+
+                  <td class="text-center text-nowrap">
+                    <a
+                      class="btn btn-sm btn-primary"
+                      href="{{ url_for('game_detail', game_id=game.id) }}"
+                    >
+                      Open
+                    </a>
+                  </td>
+                </tr>
+
+                <tr class="rank-preview-row">
+                  <td colspan="7">
+                    <div class="rank-expanded-preview">
+                      <img
+                        src="{{ game.image_url or url_for('static', filename='images/controller.png') }}"
+                        alt="{{ game.name }} image"
+                        class="rank-expanded-img"
+                      />
+
+                      <div class="rank-expanded-info">
+                        <h5 class="mb-1">{{ game.name }}</h5>
+                        <p class="text-muted mb-2">{{ game.company }}</p>
+
+                        <p class="mb-2">
+                          {{ game.description or "No description provided." }}
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-4 small">
+                          <span>
+                            <strong>Gameplay:</strong>
+                            {% if game.average_gameplay() %} {{
+                            "%.1f"|format(game.average_gameplay()) }} {% else %}
+                            - {% endif %}
+                          </span>
+
+                          <span>
+                            <strong>Difficulty:</strong>
+                            {% if game.average_difficulty() %} {{
+                            "%.1f"|format(game.average_difficulty()) }} {% else
+                            %} - {% endif %}
+                          </span>
+
+                          <span>
+                            <strong>Ratings:</strong>
+                            {{ game.ratings|length }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                {% else %}
+                <tr>
+                  <td colspan="7" class="text-center text-muted py-4">
+                    No games yet. Add one to start ranking.
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

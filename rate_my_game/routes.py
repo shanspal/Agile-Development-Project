@@ -1,13 +1,125 @@
-from flask import render_template, request, redirect, url_for, jsonify, abort
+from functools import wraps
+
+from flask import render_template, request, redirect, url_for, jsonify, abort, session
+from werkzeug.security import check_password_hash, generate_password_hash
 from .database import db
-from .models import Game, Rating, GameTag, PREDEFINED_TAGS
+from .models import Game, Rating, GameTag, PREDEFINED_TAGS, User
 
 def register_routes(app):
+    def login_required(view):
+        @wraps(view)
+        def wrapped(*args, **kwargs):
+            if not session.get("user_id"):
+                return redirect(url_for("login", next=request.path))
+            return view(*args, **kwargs)
+
+        return wrapped
+
     # ---------- HTML ROUTES ----------
 
     @app.route("/")
     def index():
         return render_template("index.html", tags=PREDEFINED_TAGS)
+
+    @app.route("/ranks")
+    def ranks():
+        sort_by = request.args.get("sort", "gameplay")
+        order = request.args.get("order", "desc")
+
+        reverse_order = order == "desc"
+
+        games = Game.query.all()
+
+        if sort_by == "difficulty":
+            games.sort(
+                key=lambda g: (g.average_difficulty() or 0),
+                reverse=reverse_order
+            )
+
+        elif sort_by == "ratings":
+            games.sort(
+                key=lambda g: len(g.ratings),
+                reverse=reverse_order
+            )
+
+        elif sort_by == "name":
+            games.sort(
+                key=lambda g: g.name.lower(),
+                reverse=reverse_order
+            )
+
+        else:
+            sort_by = "gameplay"
+            games.sort(
+                key=lambda g: (g.average_gameplay() or 0),
+                reverse=reverse_order
+            )
+
+        next_order = "asc" if order == "desc" else "desc"
+
+        return render_template(
+            "ranks.html",
+            games=games,
+            sort_by=sort_by,
+            order=order,
+            next_order=next_order
+        )
+
+    @app.route("/register", methods=["GET", "POST"])
+    def register():
+        if request.method == "POST":
+            username = request.form.get("username", "").strip()
+            email = request.form.get("email", "").strip()
+            password = request.form.get("password", "")
+
+            if not username or not email or not password:
+                return render_template(
+                    "register.html",
+                    error="Username, email, and password are required.",
+                )
+
+            if User.query.filter_by(username=username).first():
+                return render_template("register.html", error="Username is already taken.")
+
+            if User.query.filter_by(email=email).first():
+                return render_template("register.html", error="Email is already registered.")
+
+            user = User(
+                username=username,
+                email=email,
+                password_hash=generate_password_hash(password),
+            )
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for("login"))
+
+        return render_template("register.html")
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        next_url = request.args.get("next") or url_for("index")
+
+        if request.method == "POST":
+            username = request.form.get("username", "").strip()
+            password = request.form.get("password", "")
+
+            if not username or not password:
+                return render_template("login.html", error="Username and password are required.", next=next_url)
+
+            user = User.query.filter_by(username=username).first()
+            if not user or not check_password_hash(user.password_hash, password):
+                return render_template("login.html", error="Invalid username or password.", next=next_url)
+
+            session["user_id"] = user.id
+            session["username"] = user.username
+            return redirect(next_url)
+
+        return render_template("login.html", next=next_url)
+
+    @app.route("/logout", methods=["POST"])
+    def logout():
+        session.clear()
+        return redirect(url_for("index"))
 
     @app.route("/games/<int:game_id>")
     def game_detail(game_id):
@@ -27,6 +139,8 @@ def register_routes(app):
         if request.method == "POST":
             name = request.form.get("name", "").strip()
             company = request.form.get("company", "").strip()
+            image_url = request.form.get("image_url","").strip()
+            description = request.form.get("description","").strip()
 
             if not name or not company:
                 return render_template(
@@ -34,7 +148,13 @@ def register_routes(app):
                     error="Name and company are required.",
                 )
 
-            game = Game(name=name, company=company)
+            game = Game(
+                name=name, 
+                company=company,
+                image_url=image_url or None,
+                description=description or None,
+            )
+
             db.session.add(game)
             db.session.commit()
 
@@ -55,6 +175,9 @@ def register_routes(app):
         if request.method == "POST":
             name = request.form.get("name", "").strip()
             company = request.form.get("company", "").strip()
+            image_url = request.form.get("image_url","").strip()
+            description = request.form.get("description","").strip()
+
 
             if not name or not company:
                 return render_template(
@@ -65,12 +188,15 @@ def register_routes(app):
 
             game.name = name
             game.company = company
+            game.image_url = image_url or None
+            game.description = description or None
             db.session.commit()
             return redirect(url_for("game_detail", game_id=game.id))
 
         return render_template("edit_game.html", game=game)
 
     @app.route("/games/<int:game_id>/delete", methods=["POST"])
+    @login_required
     def delete_game(game_id):
         game = Game.query.get_or_404(game_id)
         db.session.delete(game)
